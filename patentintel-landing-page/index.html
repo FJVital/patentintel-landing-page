@@ -9,10 +9,6 @@
         .gradient-bg {
             background: linear-gradient(135deg, #6699ff 0%, #000066 100%);
         }
-        .logo-placeholder {
-            background: rgba(255,255,255,0.2);
-            border: 2px dashed rgba(255,255,255,0.5);
-        }
         
         /* Button Size Controls */
         .hero-btn {
@@ -20,7 +16,7 @@
             height: auto;
         }
         .service-btn {
-            max-width: 240px; /* 120% of 200px */
+            max-width: 240px;
             height: auto;
         }
         .sample-btn {
@@ -28,7 +24,7 @@
             height: auto;
         }
         .cta-btn {
-            max-width: 400px; /* 125% of 320px */
+            max-width: 400px;
             height: auto;
         }
         
@@ -48,6 +44,7 @@
             padding: 16px;
             min-width: 200px;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
         }
         .mobile-menu.active {
             display: block;
@@ -97,6 +94,12 @@
                 display: block;
             }
         }
+
+        /* Ensure proper section structure */
+        section {
+            position: relative;
+            z-index: 1;
+        }
     </style>
 </head>
 <body class="font-sans">
@@ -115,13 +118,14 @@
                     <span></span>
                     <span></span>
                     
-                    <!-- Mobile Menu - Positioned directly under hamburger -->
+                    <!-- Mobile Menu -->
                     <div id="mobile-menu" class="mobile-menu">
                         <nav class="flex flex-col space-y-4">
                             <a href="#services" class="hover:text-blue-200 transition text-white" onclick="closeMenu()">Services</a>
                             <a href="#process" class="hover:text-blue-200 transition text-white" onclick="closeMenu()">How It Works</a>
                             <a href="#samples" class="hover:text-blue-200 transition text-white" onclick="closeMenu()">Sample Reports</a>
                             <a href="#testimonials" class="hover:text-blue-200 transition text-white" onclick="closeMenu()">Success Stories</a>
+                            <a href="mailto:hello@patentintel.pro" class="hover:text-blue-200 transition text-white" onclick="closeMenu()">Contact</a>
                         </nav>
                     </div>
                 </div>
@@ -134,7 +138,7 @@
         <div class="container mx-auto px-6 text-center">
             <h1 class="text-4xl md:text-4xl font-bold mb-6">
                 Get Professional patent research for entrepreneurs and inventors in
- <span class="text-orange-500">48 Hours</span>
+                <span class="text-orange-500">48 Hours</span>
             </h1>
             <p class="text-xl mb-8 max-w-3xl font-bold mx-auto opacity-90">
                 Don't let patent uncertainty stall your launch. Get the clarity you need in just 48 hours with our professional patent research. Using AI-enhanced research and the expertise of industrial designers, we deliver a comprehensive analysis for up to 70% less than law firms, which can take two weeks or more.
@@ -146,10 +150,404 @@
         </div>
     </section>
 
-    <!-- Problem/Solution Section - Side by Side Layout -->
+    <!-- Problem/Solution Section -->
     <section class="py-16 bg-gray-50">
         <div class="container mx-auto px-6">
-            <div class="grid md:grid-cols-2 gap-12 items-start">
+            <div class="max-w-6xl mx-auto">
+                <div class="grid md:grid-cols-2 gap-12 items-start">
+                    <div class="space-y-6">
+                        <h2 class="text-3xl font-bold text-orange-500 mb-6">Why Most Inventors Skip Patent Research</h2>
+                        <div class="space-y-4">
+                            <div class="flex items-start space-x-3">
+                                <img src="red-x.png" alt="Problem" class="w-6 h-6 mt-1 flex-shrink-0">
+                                <div>
+                                    <h3 class="font-semibold text-gray-900 scaled-text">Too Expensive</h3>
+                                    <p class="text-gray-600 scaled-text">Law firms charge $3,000-$5,000 for comprehensive patent searches</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start space-x-3">
+                                <img src="red-x.png" alt="Problem" class="w-6 h-6 mt-1 flex-shrink-0">
+                                <div>
+                                    <h3 class="font-semibold text-gray-900 scaled-text">Too Slow</h3>
+                                    <p class="text-gray-600 scaled-text">Traditional research takes 2-3 weeks, killing product momentum</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start space-x-3">
+                                <img src="red-x.png" alt="Problem" class="w-6 h-6 mt-1 flex-shrink-0">
+                                <div>
+                                    <h3 class="font-semibold text-gray-900 scaled-text">Hard to Understand</h3>
+                                    <p class="text-gray-600 scaled-text">Dense legal reports that don't answer your business questions</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="space-y-6">
+                        <h2 class="text-3xl font-bold text-orange-500 mb-6">Our Solution</h2>
+                        <div class="space-y-4">
+                            <div class="flex items-start space-x-3">
+                                <img src="checkmark.png" alt="Solution" class="w-6 h-6 mt-1 flex-shrink-0">
+                                <div>
+                                    <h3 class="font-semibold text-gray-900 scaled-text">70% Less Expensive</h3>
+                                    <p class="text-gray-600 scaled-text">Professional research starting at $299 instead of $3,000+</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start space-x-3">
+                                <img src="checkmark.png" alt="Solution" class="w-6 h-6 mt-1 flex-shrink-0">
+                                <div>
+                                    <h3 class="font-semibold text-gray-900 scaled-text">48-Hour Delivery</h3>
+                                    <p class="text-gray-600 scaled-text">AI-enhanced research maintains speed without sacrificing quality</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start space-x-3">
+                                <img src="checkmark.png" alt="Solution" class="w-6 h-6 mt-1 flex-shrink-0">
+                                <div>
+                                    <h3 class="font-semibold text-gray-900 scaled-text">Business-Focused Reports</h3>
+                                    <p class="text-gray-600 scaled-text">Clear recommendations for you</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="py-16">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-12">
+                <h2 class="text-4xl font-bold text-orange-500 mb-4">Choose Your Research Level</h2>
+                <p class="text-xl text-gray-600">From quick patent checks to comprehensive landscape analysis</p>
+            </div>
+            
+            <div class="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+                <!-- Quick Check -->
+                <div class="bg-white p-8 rounded-lg shadow-lg border-2 border-gray-200">
+                    <h3 class="text-2xl font-bold text-gray-900 mb-4">Quick Check</h3>
+                    <div class="text-3xl font-bold text-blue-600 mb-6">$299</div>
+                    <ul class="space-y-3 mb-8">
+                        <li class="flex items-center">
+                            <img src="checkmark.png" alt="Included" class="w-5 h-5 mr-2">
+                            Basic prior art search
+                        </li>
+                        <li class="flex items-center">
+                            <img src="checkmark.png" alt="Included" class="w-5 h-5 mr-2">
+                            3-5 key patents analyzed
+                        </li>
+                        <li class="flex items-center">
+                            <img src="checkmark.png" alt="Included" class="w-5 h-5 mr-2">
+                            Simple conflict assessment
+                        </li>
+                        <li class="flex items-center">
+                            <img src="checkmark.png" alt="Included" class="w-5 h-5 mr-2">
+                            24-48 hour delivery
+                        </li>
+                    </ul>
+                    <div class="space-y-3">
+                        <img src="get-quick-check.png" alt="Get Quick Check" class="service-btn cursor-pointer hover:opacity-90 transition mx-auto" onclick="openModal('quick-check')">
+                    </div>
+                </div>
+
+                <!-- Complete Analysis - Most Popular -->
+                <div class="bg-white p-8 rounded-lg shadow-lg border-4 border-green-500 relative">
+                    <div class="absolute -top-4 left-1/2 transform -translate-x-1/2">
+                        <span class="bg-green-500 text-white px-4 py-1 rounded-full text-sm font-semibold">MOST POPULAR</span>
+                    </div>
+                    <h3 class="text-2xl font-bold text-gray-900 mb-4">Complete Analysis</h3>
+                    <div class="mb-4">
+                        <span class="text-3xl font-bold text-green-600">$399</span>
+                        <span class="text-lg text-gray-500 line-through ml-2">$799</span>
+                        <div class="text-sm text-red-600 font-medium">Beta Price - 50% Off</div>
+                    </div>
+                    <ul class="space-y-3 mb-8">
+                        <li class="flex items-center">
+                            <img src="checkmark.png" alt="Included" class="w-5 h-5 mr-2">
+                            Comprehensive patent landscape
+                        </li>
+                        <li class="flex items-center">
+                            <img src="checkmark.png" alt="Included" class="w-5 h-5 mr-2">
+                            Detailed conflict analysis
+                        </li>
+                        <li class="flex items-center">
+                            <img src="checkmark.png" alt="Included" class="w-5 h-5 mr-2">
+                            Business recommendations
+                        </li>
+                        <li class="flex items-center">
+                            <img src="checkmark.png" alt="Included" class="w-5 h-5 mr-2">
+                            Freedom to operate assessment
+                        </li>
+                        <li class="flex items-center">
+                            <img src="checkmark.png" alt="Included" class="w-5 h-5 mr-2">
+                            Professional report
+                        </li>
+                    </ul>
+                    <div class="space-y-3">
+                        <img src="start-complete-analysis.png" alt="Start Complete Analysis" class="service-btn cursor-pointer hover:opacity-90 transition mx-auto" onclick="openModal('complete-analysis')">
+                    </div>
+                </div>
+
+                <!-- Premium + Strategy -->
+                <div class="bg-white p-8 rounded-lg shadow-lg border-2 border-gray-200">
+                    <h3 class="text-2xl font-bold text-gray-900 mb-4">Premium + Strategy</h3>
+                    <div class="text-3xl font-bold text-blue-600 mb-6">$1,299</div>
+                    <ul class="space-y-3 mb-8">
+                        <li class="flex items-center">
+                            <img src="checkmark.png" alt="Included" class="w-5 h-5 mr-2">
+                            Everything in Complete Analysis
+                        </li>
+                        <li class="flex items-center">
+                            <img src="checkmark.png" alt="Included" class="w-5 h-5 mr-2">
+                            30-minute strategy consultation
+                        </li>
+                        <li class="flex items-center">
+                            <img src="checkmark.png" alt="Included" class="w-5 h-5 mr-2">
+                            Design-around recommendations
+                        </li>
+                        <li class="flex items-center">
+                            <img src="checkmark.png" alt="Included" class="w-5 h-5 mr-2">
+                            IP filing guidance
+                        </li>
+                    </ul>
+                    <div class="space-y-3">
+                        <img src="get-premium-service.png" alt="Get Premium Service" class="service-btn cursor-pointer hover:opacity-90 transition mx-auto" onclick="openModal('premium-strategy')">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sample Reports Section -->
+    <section id="samples" class="py-16 bg-gray-50">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-12">
+                <h2 class="text-4xl font-bold text-orange-500 mb-4">See Exactly What You'll Receive</h2>
+                <p class="text-xl text-gray-600 mb-8">Download actual sample reports to see the quality and depth of our analysis</p>
+                
+                <div class="max-w-4xl mx-auto">
+                    <div class="grid md:grid-cols-3 gap-6 mb-8">
+                        <div class="bg-white p-6 rounded-lg shadow-lg border-2 border-gray-200">
+                            <h4 class="text-lg font-semibold mb-2">Quick Check Sample</h4>
+                            <p class="text-gray-600 mb-4">Smart Phone Case Analysis</p>
+                            <img src="download-pdf-299.png" alt="Download $299 Sample" class="sample-btn cursor-pointer hover:opacity-90 transition mx-auto" onclick="downloadSample('quick-check')">
+                        </div>
+                        <div class="bg-white p-6 rounded-lg shadow-lg border-2 border-green-500">
+                            <h4 class="text-lg font-semibold mb-2">Complete Analysis Sample</h4>
+                            <p class="text-gray-600 mb-4">Teardrop Salt Shakers Research</p>
+                            <img src="download-pdf-799.png" alt="Download $799 Sample" class="sample-btn cursor-pointer hover:opacity-90 transition mx-auto" onclick="downloadSample('complete-analysis')">
+                        </div>
+                        <div class="bg-white p-6 rounded-lg shadow-lg border-2 border-purple-500">
+                            <h4 class="text-lg font-semibold mb-2">Premium Strategy Sample</h4>
+                            <p class="text-gray-600 mb-4">Medical Device Assessment</p>
+                            <img src="download-pdf-1299.png" alt="Download $1299 Sample" class="sample-btn cursor-pointer hover:opacity-90 transition mx-auto" onclick="downloadSample('premium-strategy')">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works -->
+    <section id="process" class="py-16">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-12">
+                <h2 class="text-4xl font-bold text-orange-500 mb-4">How It Works</h2>
+                <p class="text-xl text-gray-600">Professional patent research made simple</p>
+            </div>
+            
+            <div class="grid md:grid-cols-4 gap-8 max-w-6xl mx-auto">
+                <div class="text-center">
+                    <img src="number-1.png" alt="Step 1" class="w-16 h-16 mx-auto mb-4">
+                    <h3 class="text-xl font-semibold mb-2">Submit Your Product</h3>
+                    <p class="text-gray-600 scaled-text">Tell us about your invention, product, or idea using our simple form</p>
+                </div>
+                
+                <div class="text-center">
+                    <img src="number-2.png" alt="Step 2" class="w-16 h-16 mx-auto mb-4">
+                    <h3 class="text-xl font-semibold mb-2">AI-Enhanced Research</h3>
+                    <p class="text-gray-600 scaled-text">Our systematic process combines AI efficiency with human expertise</p>
+                </div>
+                
+                <div class="text-center">
+                    <img src="number-3.png" alt="Step 3" class="w-16 h-16 mx-auto mb-4">
+                    <h3 class="text-xl font-semibold mb-2">Expert Analysis</h3>
+                    <p class="text-gray-600 scaled-text">Industrial designers reviews findings and creates business recommendations</p>
+                </div>
+                
+                <div class="text-center">
+                    <img src="number-4.png" alt="Step 4" class="w-16 h-16 mx-auto mb-4">
+                    <h3 class="text-xl font-semibold mb-2">Professional Report</h3>
+                    <p class="text-gray-600 scaled-text">Receive investor-ready analysis within 48 hours</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="py-16 bg-gray-50">
+        <div class="container mx-auto px-6">
+            <div class="grid md:grid-cols-2 gap-12 items-center max-w-6xl mx-auto">
+                <div>
+                    <img src="robot-mascot.png" alt="PatentIntel AI Assistant" class="w-64 h-auto mx-auto mb-4 rounded-lg">
+                </div>
+                <div>
+                    <h2 class="text-3xl font-bold text-orange-500 mb-6">Why Trust patentintel.pro?</h2>
+                    <div class="space-y-4">
+                        <div>
+                            <h3 class="font-semibold text-gray-900 text-lg">Industrial Design Expertise</h3>
+                            <p class="text-gray-600 scaled-text">Professional product designer with deep understanding of innovation and manufacturing</p>
+                        </div>
+                        <div>
+                            <h3 class="font-semibold text-gray-900 text-lg">AI-Enhanced Methodology</h3>
+                            <p class="text-gray-600 scaled-text">Cutting-edge AI tools for comprehensive research without sacrificing human insight</p>
+                        </div>
+                        <div>
+                            <h3 class="font-semibold text-gray-900 text-lg">Business-Focused Results</h3>
+                            <p class="text-gray-600 scaled-text">Reports designed for entrepreneurs, investors, and product development teams</p>
+                        </div>
+                        <div>
+                            <h3 class="font-semibold text-gray-900 text-lg">Proven Track Record</h3>
+                            <p class="text-gray-600 scaled-text">Successfully analyzed products from innovative fruit bowls to modular spice racks</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Success Stories Section -->
+    <section id="testimonials" class="py-16">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-12">
+                <h2 class="text-4xl font-bold text-orange-500 mb-4">Success Stories</h2>
+                <p class="text-xl text-gray-600">Real results from real entrepreneurs</p>
+            </div>
+            
+            <div class="testimonial-slider">
+                <div class="testimonial-track" id="testimonial-track">
+                    <!-- Testimonial 1 -->
+                    <div class="testimonial-slide">
+                        <div class="bg-white p-8 rounded-lg shadow-lg max-w-4xl mx-auto">
+                            <blockquote class="text-lg italic text-gray-700 mb-4">
+                                "I tried doing the research myself with ChatGPT first, but quickly realized it can't access real patent databases or verify patent status. <strong>When you're investing $50,000 in product development, you need verified data and professional analysis that investors and attorneys will trust, not AI guesswork.</strong>"
+                            </blockquote>
+                            <div class="text-right">
+                                <p class="font-semibold text-gray-900">- Michael Torres</p>
+                                <p class="text-gray-600">Hardware Startup Founder</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Testimonial 2 -->
+                    <div class="testimonial-slide">
+                        <div class="bg-white p-8 rounded-lg shadow-lg max-w-4xl mx-auto">
+                            <blockquote class="text-lg italic text-gray-700 mb-4">
+                                "I lost a lot of time doing the research by myself. I thought ChatGPT would help me, but it just gave me generic advice and missed critical patents. <strong>PatentIntel found 3 conflicting patents I never would have discovered. Worth every penny!</strong>"
+                            </blockquote>
+                            <div class="text-right">
+                                <p class="font-semibold text-gray-900">- Sarah Chen</p>
+                                <p class="text-gray-600">Kitchen Gadget Inventor</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Testimonial 3 -->
+                    <div class="testimonial-slide">
+                        <div class="bg-white p-8 rounded-lg shadow-lg max-w-4xl mx-auto">
+                            <blockquote class="text-lg italic text-gray-700 mb-4">
+                                "I am very happy that I can launch my product 'Onde de Chaleur' - imagine a single, elongated spiral of polished aluminum, like a wave frozen in motion holding a tapered candle. <strong>PatentIntel's report showed clear freedom to operate and gave me confidence to move forward with production.</strong>"
+                            </blockquote>
+                            <div class="text-right">
+                                <p class="font-semibold text-gray-900">- Marc Dubois</p>
+                                <p class="text-gray-600">Artisan Designer</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Testimonial 4 -->
+                    <div class="testimonial-slide">
+                        <div class="bg-white p-8 rounded-lg shadow-lg max-w-4xl mx-auto">
+                            <blockquote class="text-lg italic text-gray-700 mb-4">
+                                "I did not know that there was another product already patented with similar mechanisms. I rearranged my product design based on PatentIntel's recommendations and successfully launched. <strong>If I wouldn't have gotten my report from PatentIntel.pro, I would have faced legal issues after investing $50K in tooling.</strong>"
+                            </blockquote>
+                            <div class="text-right">
+                                <p class="font-semibold text-gray-900">- Jennifer Rodriguez</p>
+                                <p class="text-gray-600">Product Developer</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Testimonial 5 -->
+                    <div class="testimonial-slide">
+                        <div class="bg-white p-8 rounded-lg shadow-lg max-w-4xl mx-auto">
+                            <blockquote class="text-lg italic text-gray-700 mb-4">
+                                "My investors were impressed with the professional patent analysis report. It showed we understood the competitive landscape and had a clear path forward. <strong>PatentIntel's report was instrumental in closing our $2M funding round.</strong>"
+                            </blockquote>
+                            <div class="text-right">
+                                <p class="font-semibold text-gray-900">- David Park</p>
+                                <p class="text-gray-600">Tech Entrepreneur</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Testimonial 6 -->
+                    <div class="testimonial-slide">
+                        <div class="bg-white p-8 rounded-lg shadow-lg max-w-4xl mx-auto">
+                            <blockquote class="text-lg italic text-gray-700 mb-4">
+                                "I needed patent research for my Kickstarter campaign launch. Law firms quoted 3-4 weeks and $4,000. <strong>PatentIntel delivered a comprehensive report in 2 days for $799. The quality was identical to what we got from our attorney, but much faster and more affordable.</strong>"
+                            </blockquote>
+                            <div class="text-right">
+                                <p class="font-semibold text-gray-900">- Amanda Foster</p>
+                                <p class="text-gray-600">Crowdfunding Creator</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Navigation dots -->
+            <div class="flex justify-center mt-8 space-x-2">
+                <button class="testimonial-dot active" onclick="showTestimonial(0)"></button>
+                <button class="testimonial-dot" onclick="showTestimonial(1)"></button>
+                <button class="testimonial-dot" onclick="showTestimonial(2)"></button>
+                <button class="testimonial-dot" onclick="showTestimonial(3)"></button>
+                <button class="testimonial-dot" onclick="showTestimonial(4)"></button>
+                <button class="testimonial-dot" onclick="showTestimonial(5)"></button>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="gradient-bg text-white py-16">
+        <div class="container mx-auto px-6 text-center">
+            <h2 class="text-3xl font-bold mb-4">Ready to Protect Your Innovation?</h2>
+            <p class="text-xl mb-8 opacity-90">Don't let patent uncertainty hold back your product launch</p>
+            <div class="text-center">
+                <img src="start-your-patent-research-today.png" alt="Start Your Patent Research Today" class="cta-btn cursor-pointer hover:opacity-90 transition mx-auto" onclick="openModal('complete-analysis')">
+                <div class="text-2xl opacity-75 mt-4">
+                    ✓ 48-hour delivery ✓ Professional quality ✓ Money-back guarantee
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-blue-900 text-white py-8">
+        <div class="container mx-auto px-6">
+            <div class="grid md:grid-cols-3 gap-8">
+                <div>
+                    <div class="flex items-center space-x-3 mb-4">
+                        <img src="logo-patentintel.png" alt="PatentIntel Logo" class="w-25 h-20 rounded">
+                    </div>
+                    <p class="text-gray-100">Professional patent research for entrepreneurs and inventors</p>
+                </div>
+                <div>
+                    <h4 class="font-semibold mb-4">Services</h4>
+                    <ul class="space-y-2 text-gray-100">
+                        <li>Quick Patent Check</li>
+                        <li>Complete Analysis</li>
+                        <li>Premium Strategy</li>
+                    </ul>
+                </div>
                 <div>
                     <h4 class="font-semibold mb-4">Contact</h4>
                     <p class="text-gray-100">hello@patentintel.pro</p>
@@ -505,6 +903,12 @@
             document.getElementById('service-display').textContent = config.service;
             document.getElementById('service-details').textContent = config.details;
             
+            // Remove any existing beta note first
+            const existingBetaNote = document.querySelector('.beta-note');
+            if (existingBetaNote) {
+                existingBetaNote.remove();
+            }
+            
             // Handle pricing display and buttons
             const priceSection = document.getElementById('price-section');
             const buttonSection = document.getElementById('button-section');
@@ -517,7 +921,7 @@
                     <span class="text-lg text-gray-500 line-through ml-2">$799</span>
                 `;
                 const betaNote = document.createElement('div');
-                betaNote.className = 'text-sm text-red-600 font-medium mt-1';
+                betaNote.className = 'text-sm text-red-600 font-medium mt-1 beta-note';
                 betaNote.textContent = 'Limited Time: First 10 Customers Only';
                 priceSection.parentNode.insertBefore(betaNote, document.getElementById('service-details'));
                 
@@ -533,7 +937,7 @@
                     </button>
                 `;
             } else {
-                // Quick Check and Premium Strategy
+                // Quick Check and Premium Strategy - NO beta messaging
                 priceSection.innerHTML = `
                     <span class="font-semibold text-gray-900">Price:</span>
                     <span class="text-2xl font-bold text-blue-600">${config.price}</span>
@@ -572,397 +976,4 @@
         });
     </script>
 </body>
-</html>2 class="text-3xl font-bold text-orange-500 mb-6">Why Most Inventors Skip Patent Research</h2>
-                    <div class="space-y-4">
-                        <div class="flex items-start space-x-3">
-                            <img src="red-x.png" alt="Problem" class="w-6 h-6 mt-1">
-                            <div>
-                                <h3 class="font-semibold text-gray-900 scaled-text">Too Expensive</h3>
-                                <p class="text-gray-600 scaled-text">Law firms charge $3,000-$5,000 for comprehensive patent searches</p>
-                            </div>
-                        </div>
-                        <div class="flex items-start space-x-3">
-                            <img src="red-x.png" alt="Problem" class="w-6 h-6 mt-1">
-                            <div>
-                                <h3 class="font-semibold text-gray-900 scaled-text">Too Slow</h3>
-                                <p class="text-gray-600 scaled-text">Traditional research takes 2-3 weeks, killing product momentum</p>
-                            </div>
-                        </div>
-                        <div class="flex items-start space-x-3">
-                            <img src="red-x.png" alt="Problem" class="w-6 h-6 mt-1">
-                            <div>
-                                <h3 class="font-semibold text-gray-900 scaled-text">Hard to Understand</h3>
-                                <p class="text-gray-600 scaled-text">Dense legal reports that don't answer your business questions</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div>
-                    <h2 class="text-3xl font-bold text-orange-500 mb-6">Our Solution</h2>
-                    <div class="space-y-4">
-                        <div class="flex items-start space-x-3">
-                            <img src="checkmark.png" alt="Solution" class="w-6 h-6 mt-1">
-                            <div>
-                                <h3 class="font-semibold text-gray-900 scaled-text">70% Less Expensive</h3>
-                                <p class="text-gray-600 scaled-text">Professional research starting at $299 instead of $3,000+</p>
-                            </div>
-                        </div>
-                        <div class="flex items-start space-x-3">
-                            <img src="checkmark.png" alt="Solution" class="w-6 h-6 mt-1">
-                            <div>
-                                <h3 class="font-semibold text-gray-900 scaled-text">48-Hour Delivery</h3>
-                                <p class="text-gray-600 scaled-text">AI-enhanced research maintains speed without sacrificing quality</p>
-                            </div>
-                        </div>
-                        <div class="flex items-start space-x-3">
-                            <img src="checkmark.png" alt="Solution" class="w-6 h-6 mt-1">
-                            <div>
-                                <h3 class="font-semibold text-gray-900 scaled-text">Business-Focused Reports</h3>
-                                <p class="text-gray-600 scaled-text">Clear recommendations for you</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Services Section -->
-    <section id="services" class="py-16">
-        <div class="container mx-auto px-6">
-            <div class="text-center mb-12">
-                <h2 class="text-4xl font-bold text-orange-500 mb-4">Choose Your Research Level</h2>
-                <p class="text-xl text-gray-600">From quick patent checks to comprehensive landscape analysis</p>
-            </div>
-            
-            <div class="grid md:grid-cols-3 gap-8">
-                <!-- Quick Check -->
-                <div class="bg-white p-8 rounded-lg shadow-lg border-2 border-gray-200">
-                    <h3 class="text-2xl font-bold text-gray-900 mb-4">Quick Check</h3>
-                    <div class="text-3xl font-bold text-blue-600 mb-6">$299</div>
-                    <ul class="space-y-3 mb-8">
-                        <li class="flex items-center">
-                            <img src="checkmark.png" alt="Included" class="w-5 h-5 mr-2">
-                            Basic prior art search
-                        </li>
-                        <li class="flex items-center">
-                            <img src="checkmark.png" alt="Included" class="w-5 h-5 mr-2">
-                            3-5 key patents analyzed
-                        </li>
-                        <li class="flex items-center">
-                            <img src="checkmark.png" alt="Included" class="w-5 h-5 mr-2">
-                            Simple conflict assessment
-                        </li>
-                        <li class="flex items-center">
-                            <img src="checkmark.png" alt="Included" class="w-5 h-5 mr-2">
-                            24-48 hour delivery
-                        </li>
-                    </ul>
-                    <div class="space-y-3">
-                        <img src="get-quick-check.png" alt="Get Quick Check" class="service-btn cursor-pointer hover:opacity-90 transition mx-auto" onclick="openModal('quick-check')">
-                    </div>
-                </div>
-
-                <!-- Complete Analysis - Most Popular -->
-                <div class="bg-white p-8 rounded-lg shadow-lg border-4 border-green-500 relative">
-                    <div class="absolute -top-4 left-1/2 transform -translate-x-1/2">
-                        <span class="bg-green-500 text-white px-4 py-1 rounded-full text-sm font-semibold">MOST POPULAR</span>
-                    </div>
-                    <h3 class="text-2xl font-bold text-gray-900 mb-4">Complete Analysis</h3>
-                    <div class="mb-4">
-                        <span class="text-3xl font-bold text-green-600">$399</span>
-                        <span class="text-lg text-gray-500 line-through ml-2">$799</span>
-                        <div class="text-sm text-red-600 font-medium">Beta Price - 50% Off</div>
-                    </div>
-                    <ul class="space-y-3 mb-8">
-                        <li class="flex items-center">
-                            <img src="checkmark.png" alt="Included" class="w-5 h-5 mr-2">
-                            Comprehensive patent landscape
-                        </li>
-                        <li class="flex items-center">
-                            <img src="checkmark.png" alt="Included" class="w-5 h-5 mr-2">
-                            Detailed conflict analysis
-                        </li>
-                        <li class="flex items-center">
-                            <img src="checkmark.png" alt="Included" class="w-5 h-5 mr-2">
-                            Business recommendations
-                        </li>
-                        <li class="flex items-center">
-                            <img src="checkmark.png" alt="Included" class="w-5 h-5 mr-2">
-                            Freedom to operate assessment
-                        </li>
-                        <li class="flex items-center">
-                            <img src="checkmark.png" alt="Included" class="w-5 h-5 mr-2">
-                            Professional report
-                        </li>
-                    </ul>
-                    <div class="space-y-3">
-                        <img src="start-complete-analysis.png" alt="Start Complete Analysis" class="service-btn cursor-pointer hover:opacity-90 transition mx-auto" onclick="openModal('complete-analysis')">
-                    </div>
-                </div>
-
-                <!-- Premium + Strategy -->
-                <div class="bg-white p-8 rounded-lg shadow-lg border-2 border-gray-200">
-                    <h3 class="text-2xl font-bold text-gray-900 mb-4">Premium + Strategy</h3>
-                    <div class="text-3xl font-bold text-blue-600 mb-6">$1,299</div>
-                    <ul class="space-y-3 mb-8">
-                        <li class="flex items-center">
-                            <img src="checkmark.png" alt="Included" class="w-5 h-5 mr-2">
-                            Everything in Complete Analysis
-                        </li>
-                        <li class="flex items-center">
-                            <img src="checkmark.png" alt="Included" class="w-5 h-5 mr-2">
-                            30-minute strategy consultation
-                        </li>
-                        <li class="flex items-center">
-                            <img src="checkmark.png" alt="Included" class="w-5 h-5 mr-2">
-                            Design-around recommendations
-                        </li>
-                        <li class="flex items-center">
-                            <img src="checkmark.png" alt="Included" class="w-5 h-5 mr-2">
-                            IP filing guidance
-                        </li>
-                    </ul>
-                    <div class="space-y-3">
-                        <img src="get-premium-service.png" alt="Get Premium Service" class="service-btn cursor-pointer hover:opacity-90 transition mx-auto" onclick="openModal('premium-strategy')">
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Sample Reports Section -->
-    <section id="samples" class="py-16 bg-gray-50">
-        <div class="container mx-auto px-6">
-            <div class="text-center mb-12">
-                <h2 class="text-4xl font-bold text-orange-500 mb-4">See Exactly What You'll Receive</h2>
-                <p class="text-xl text-gray-600 mb-8">Download actual sample reports to see the quality and depth of our analysis</p>
-                
-                <div class="max-w-4xl mx-auto">
-                    <div class="grid md:grid-cols-3 gap-6 mb-8">
-                        <div class="bg-white p-6 rounded-lg shadow-lg border-2 border-gray-200">
-                            <h4 class="text-lg font-semibold mb-2">Quick Check Sample</h4>
-                            <p class="text-gray-600 mb-4">Smart Phone Case Analysis</p>
-                            <img src="download-pdf-299.png" alt="Download $299 Sample" class="sample-btn cursor-pointer hover:opacity-90 transition mx-auto" onclick="downloadSample('quick-check')">
-                        </div>
-                        <div class="bg-white p-6 rounded-lg shadow-lg border-2 border-green-500">
-                            <h4 class="text-lg font-semibold mb-2">Complete Analysis Sample</h4>
-                            <p class="text-gray-600 mb-4">Teardrop Salt Shakers Research</p>
-                            <img src="download-pdf-799.png" alt="Download $799 Sample" class="sample-btn cursor-pointer hover:opacity-90 transition mx-auto" onclick="downloadSample('complete-analysis')">
-                        </div>
-                        <div class="bg-white p-6 rounded-lg shadow-lg border-2 border-purple-500">
-                            <h4 class="text-lg font-semibold mb-2">Premium Strategy Sample</h4>
-                            <p class="text-gray-600 mb-4">Medical Device Assessment</p>
-                            <img src="download-pdf-1299.png" alt="Download $1299 Sample" class="sample-btn cursor-pointer hover:opacity-90 transition mx-auto" onclick="downloadSample('premium-strategy')">
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- How It Works -->
-    <section id="process" class="py-16">
-        <div class="container mx-auto px-6">
-            <div class="text-center mb-12">
-                <h2 class="text-4xl font-bold text-orange-500 mb-4">How It Works</h2>
-                <p class="text-xl text-gray-600">Professional patent research made simple</p>
-            </div>
-            
-            <div class="grid md:grid-cols-4 gap-8">
-                <div class="text-center">
-                    <img src="number-1.png" alt="Step 1" class="w-16 h-16 mx-auto mb-4">
-                    <h3 class="text-xl font-semibold mb-2">Submit Your Product</h3>
-                    <p class="text-gray-600 scaled-text">Tell us about your invention, product, or idea using our simple form</p>
-                </div>
-                
-                <div class="text-center">
-                    <img src="number-2.png" alt="Step 2" class="w-16 h-16 mx-auto mb-4">
-                    <h3 class="text-xl font-semibold mb-2">AI-Enhanced Research</h3>
-                    <p class="text-gray-600 scaled-text">Our systematic process combines AI efficiency with human expertise</p>
-                </div>
-                
-                <div class="text-center">
-                    <img src="number-3.png" alt="Step 3" class="w-16 h-16 mx-auto mb-4">
-                    <h3 class="text-xl font-semibold mb-2">Expert Analysis</h3>
-                    <p class="text-gray-600 scaled-text">Industrial designers reviews findings and creates business recommendations</p>
-                </div>
-                
-                <div class="text-center">
-                    <img src="number-4.png" alt="Step 4" class="w-16 h-16 mx-auto mb-4">
-                    <h3 class="text-xl font-semibold mb-2">Professional Report</h3>
-                    <p class="text-gray-600 scaled-text">Receive investor-ready analysis within 48 hours</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- About Section -->
-    <section class="py-16 bg-gray-50">
-        <div class="container mx-auto px-6">
-            <div class="grid md:grid-cols-2 gap-12 items-center">
-                <div>
-                    <!-- PatentIntel Robot Mascot -->
-                    <img src="robot-mascot.png" alt="PatentIntel AI Assistant" class="w-64 h-auto mx-auto mb-4 rounded-lg">
-                </div>
-                <div>
-                    <h2 class="text-3xl font-bold text-orange-500 mb-6">Why Trust patentintel.pro?</h2>
-                    <div class="space-y-4">
-                        <div>
-                            <h3 class="font-semibold text-gray-900 text-lg">Industrial Design Expertise</h3>
-                            <p class="text-gray-600 scaled-text">Professional product designer with deep understanding of innovation and manufacturing</p>
-                        </div>
-                        <div>
-                            <h3 class="font-semibold text-gray-900 text-lg">AI-Enhanced Methodology</h3>
-                            <p class="text-gray-600 scaled-text">Cutting-edge AI tools for comprehensive research without sacrificing human insight</p>
-                        </div>
-                        <div>
-                            <h3 class="font-semibold text-gray-900 text-lg">Business-Focused Results</h3>
-                            <p class="text-gray-600 scaled-text">Reports designed for entrepreneurs, investors, and product development teams</p>
-                        </div>
-                        <div>
-                            <h3 class="font-semibold text-gray-900 text-lg">Proven Track Record</h3>
-                            <p class="text-gray-600 scaled-text">Successfully analyzed products from innovative fruit bowls to modular spice racks</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Success Stories Section -->
-    <section id="testimonials" class="py-16">
-        <div class="container mx-auto px-6">
-            <div class="text-center mb-12">
-                <h2 class="text-4xl font-bold text-orange-500 mb-4">Success Stories</h2>
-                <p class="text-xl text-gray-600">Real results from real entrepreneurs</p>
-            </div>
-            
-            <div class="testimonial-slider">
-                <div class="testimonial-track" id="testimonial-track">
-                    <!-- Testimonial 1 - Michael Torres ChatGPT Story (FIRST POSITION) -->
-                    <div class="testimonial-slide">
-                        <div class="bg-white p-8 rounded-lg shadow-lg max-w-4xl mx-auto">
-                            <blockquote class="text-lg italic text-gray-700 mb-4">
-                                "I tried doing the research myself with ChatGPT first, but quickly realized it can't access real patent databases or verify patent status. <strong>When you're investing $50,000 in product development, you need verified data and professional analysis that investors and attorneys will trust, not AI guesswork.</strong>"
-                            </blockquote>
-                            <div class="text-right">
-                                <p class="font-semibold text-gray-900">- Michael Torres</p>
-                                <p class="text-gray-600">Hardware Startup Founder</p>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <!-- Testimonial 2 - Sarah Chen -->
-                    <div class="testimonial-slide">
-                        <div class="bg-white p-8 rounded-lg shadow-lg max-w-4xl mx-auto">
-                            <blockquote class="text-lg italic text-gray-700 mb-4">
-                                "I lost a lot of time doing the research by myself. I thought ChatGPT would help me, but it just gave me generic advice and missed critical patents. <strong>PatentIntel found 3 conflicting patents I never would have discovered. Worth every penny!</strong>"
-                            </blockquote>
-                            <div class="text-right">
-                                <p class="font-semibold text-gray-900">- Sarah Chen</p>
-                                <p class="text-gray-600">Kitchen Gadget Inventor</p>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <!-- Testimonial 3 - Marc Dubois -->
-                    <div class="testimonial-slide">
-                        <div class="bg-white p-8 rounded-lg shadow-lg max-w-4xl mx-auto">
-                            <blockquote class="text-lg italic text-gray-700 mb-4">
-                                "I am very happy that I can launch my product 'Onde de Chaleur' - imagine a single, elongated spiral of polished aluminum, like a wave frozen in motion holding a tapered candle. <strong>PatentIntel's report showed clear freedom to operate and gave me confidence to move forward with production.</strong>"
-                            </blockquote>
-                            <div class="text-right">
-                                <p class="font-semibold text-gray-900">- Marc Dubois</p>
-                                <p class="text-gray-600">Artisan Designer</p>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <!-- Testimonial 4 - Jennifer Rodriguez -->
-                    <div class="testimonial-slide">
-                        <div class="bg-white p-8 rounded-lg shadow-lg max-w-4xl mx-auto">
-                            <blockquote class="text-lg italic text-gray-700 mb-4">
-                                "I did not know that there was another product already patented with similar mechanisms. I rearranged my product design based on PatentIntel's recommendations and successfully launched. <strong>If I wouldn't have gotten my report from PatentIntel.pro, I would have faced legal issues after investing $50K in tooling.</strong>"
-                            </blockquote>
-                            <div class="text-right">
-                                <p class="font-semibold text-gray-900">- Jennifer Rodriguez</p>
-                                <p class="text-gray-600">Product Developer</p>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <!-- Testimonial 5 - David Park -->
-                    <div class="testimonial-slide">
-                        <div class="bg-white p-8 rounded-lg shadow-lg max-w-4xl mx-auto">
-                            <blockquote class="text-lg italic text-gray-700 mb-4">
-                                "My investors were impressed with the professional patent analysis report. It showed we understood the competitive landscape and had a clear path forward. <strong>PatentIntel's report was instrumental in closing our $2M funding round.</strong>"
-                            </blockquote>
-                            <div class="text-right">
-                                <p class="font-semibold text-gray-900">- David Park</p>
-                                <p class="text-gray-600">Tech Entrepreneur</p>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <!-- Testimonial 6 - Amanda Foster -->
-                    <div class="testimonial-slide">
-                        <div class="bg-white p-8 rounded-lg shadow-lg max-w-4xl mx-auto">
-                            <blockquote class="text-lg italic text-gray-700 mb-4">
-                                "I needed patent research for my Kickstarter campaign launch. Law firms quoted 3-4 weeks and $4,000. <strong>PatentIntel delivered a comprehensive report in 2 days for $799. The quality was identical to what we got from our attorney, but much faster and more affordable.</strong>"
-                            </blockquote>
-                            <div class="text-right">
-                                <p class="font-semibold text-gray-900">- Amanda Foster</p>
-                                <p class="text-gray-600">Crowdfunding Creator</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Navigation dots -->
-            <div class="flex justify-center mt-8 space-x-2">
-                <button class="testimonial-dot active" onclick="showTestimonial(0)"></button>
-                <button class="testimonial-dot" onclick="showTestimonial(1)"></button>
-                <button class="testimonial-dot" onclick="showTestimonial(2)"></button>
-                <button class="testimonial-dot" onclick="showTestimonial(3)"></button>
-                <button class="testimonial-dot" onclick="showTestimonial(4)"></button>
-                <button class="testimonial-dot" onclick="showTestimonial(5)"></button>
-            </div>
-        </div>
-    </section>
-
-    <!-- CTA Section -->
-    <section class="gradient-bg text-white py-16">
-        <div class="container mx-auto px-6 text-center">
-            <h2 class="text-3xl font-bold mb-4">Ready to Protect Your Innovation?</h2>
-            <p class="text-xl mb-8 opacity-90">Don't let patent uncertainty hold back your product launch</p>
-            <div class="text-center">
-                <img src="start-your-patent-research-today.png" alt="Start Your Patent Research Today" class="cta-btn cursor-pointer hover:opacity-90 transition mx-auto" onclick="openModal('complete-analysis')">
-                <div class="text-2xl opacity-75 mt-4">
-                    ✓ 48-hour delivery ✓ Professional quality ✓ Money-back guarantee
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Footer -->
-    <footer class="bg-blue-900 text-white py-8">
-        <div class="container mx-auto px-6">
-            <div class="grid md:grid-cols-3 gap-8">
-                <div>
-                    <div class="flex items-center space-x-3 mb-4">
-                        <img src="logo-patentintel.png" alt="PatentIntel Logo" class="w-25 h-20 rounded">
-                    </div>
-                    <p class="text-gray-100">Professional patent research for entrepreneurs and inventors</p>
-                </div>
-                <div>
-                    <h4 class="font-semibold mb-4">Services</h4>
-                    <ul class="space-y-2 text-gray-100">
-                        <li>Quick Patent Check</li>
-                        <li>Complete Analysis</li>
-                        <li>Premium Strategy</li>
-                    </ul>
-                </div>
-                <div>
-                    <h
+</html>
