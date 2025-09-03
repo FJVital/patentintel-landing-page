@@ -3,8 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PatentIntel - Fast, Affordable Patent Analysis</title>
+    <title>PatentIntel - EmailJS Integration Update</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <!-- EmailJS CDN -->
+    <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
     <style>
         .gradient-bg {
             background: linear-gradient(135deg, #6699ff 0%, #000066 100%);
@@ -99,6 +101,37 @@
         section {
             position: relative;
             z-index: 1;
+        }
+
+        /* Loading spinner */
+        .spinner {
+            border: 3px solid #f3f3f3;
+            border-top: 3px solid #3498db;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            animation: spin 1s linear infinite;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Success/Error messages */
+        .message {
+            padding: 12px;
+            border-radius: 8px;
+            margin: 12px 0;
+        }
+        .success {
+            background: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+        .error {
+            background: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
         }
     </style>
 </head>
@@ -587,10 +620,12 @@
                             Cancel
                         </button>
                         <button type="submit" class="flex-1 bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 font-semibold">
-                            Download Sample
+                            <span class="button-text">Download Sample</span>
+                            <div class="spinner hidden"></div>
                         </button>
                     </div>
                 </form>
+                <div id="email-message"></div>
             </div>
         </div>
     </div>
@@ -753,15 +788,23 @@
                             Cancel
                         </button>
                         <button type="button" id="checkout-button" onclick="redirectToCheckout()" class="flex-1 bg-green-600 text-white px-6 py-3 rounded-lg hover:bg-green-700 font-semibold text-center">
-                            Secure Your Analysis
+                            <span class="button-text">Secure Your Analysis</span>
+                            <div class="spinner hidden"></div>
                         </button>
                     </div>
                 </form>
+                <div id="form-message"></div>
             </div>
         </div>
     </div>
 
     <script>
+        // EmailJS Configuration
+        // Initialize EmailJS with your User ID
+        (function() {
+            emailjs.init("YOUR_EMAILJS_USER_ID"); // Replace with your actual EmailJS User ID
+        })();
+
         // Service configuration with URLs
         const serviceConfig = {
             'quick-check': {
@@ -853,7 +896,7 @@
         `;
         document.head.appendChild(style);
 
-        // Sample download functionality
+        // Sample download functionality with EmailJS
         let currentSampleType = '';
 
         function downloadSample(sampleType) {
@@ -865,32 +908,92 @@
         function closeEmailModal() {
             document.getElementById('email-modal').classList.add('hidden');
             document.body.style.overflow = 'auto';
+            // Clear any messages
+            document.getElementById('email-message').innerHTML = '';
         }
 
-        // Email form submission
+        // Email form submission with EmailJS
         document.getElementById('email-form').addEventListener('submit', function(e) {
             e.preventDefault();
             
+            const submitButton = e.target.querySelector('button[type="submit"]');
+            const buttonText = submitButton.querySelector('.button-text');
+            const spinner = submitButton.querySelector('.spinner');
+            
+            // Show loading state
+            buttonText.style.display = 'none';
+            spinner.classList.remove('hidden');
+            submitButton.disabled = true;
+            
             const email = document.getElementById('sample-email').value;
-            const name = document.getElementById('sample-name').value;
+            const name = document.getElementById('sample-name').value || 'Not provided';
             
-            console.log('Email captured:', { email, name, sampleType: currentSampleType });
-            
-            const sampleFiles = {
-                'quick-check': 'smart-phone-case-quick-check.pdf',
-                'complete-analysis': 'teardrop-salt-shakers-complete-analysis.pdf',
-                'premium-strategy': 'smart-insulin-device-premium-strategy.pdf'
+            const emailParams = {
+                to_email: 'hello@patentintel.pro', // Your email
+                from_email: email,
+                from_name: name,
+                sample_type: currentSampleType,
+                message: `Sample download request for ${currentSampleType}`,
+                timestamp: new Date().toLocaleString()
             };
             
-            const link = document.createElement('a');
-            link.href = sampleFiles[currentSampleType];
-            link.download = sampleFiles[currentSampleType];
-            document.body.appendChild(link);
-            link.click();
-            document.body.removeChild(link);
-            
-            closeEmailModal();
-            alert('Thank you! Your sample report is downloading now.');
+            // Send email using EmailJS
+            emailjs.send('YOUR_SERVICE_ID', 'YOUR_TEMPLATE_ID', emailParams)
+                .then(function(response) {
+                    console.log('Email sent successfully:', response);
+                    
+                    // Trigger download
+                    const sampleFiles = {
+                        'quick-check': 'smart-phone-case-quick-check.pdf',
+                        'complete-analysis': 'teardrop-salt-shakers-complete-analysis.pdf',
+                        'premium-strategy': 'smart-insulin-device-premium-strategy.pdf'
+                    };
+                    
+                    const link = document.createElement('a');
+                    link.href = sampleFiles[currentSampleType];
+                    link.download = sampleFiles[currentSampleType];
+                    document.body.appendChild(link);
+                    link.click();
+                    document.body.removeChild(link);
+                    
+                    // Show success message
+                    document.getElementById('email-message').innerHTML = 
+                        '<div class="message success">Thank you! Your sample report is downloading now.</div>';
+                    
+                    // Reset form
+                    e.target.reset();
+                    
+                    // Close modal after 2 seconds
+                    setTimeout(() => {
+                        closeEmailModal();
+                    }, 2000);
+                }, function(error) {
+                    console.error('EmailJS error:', error);
+                    
+                    // Still trigger download even if email fails
+                    const sampleFiles = {
+                        'quick-check': 'smart-phone-case-quick-check.pdf',
+                        'complete-analysis': 'teardrop-salt-shakers-complete-analysis.pdf',
+                        'premium-strategy': 'smart-insulin-device-premium-strategy.pdf'
+                    };
+                    
+                    const link = document.createElement('a');
+                    link.href = sampleFiles[currentSampleType];
+                    link.download = sampleFiles[currentSampleType];
+                    document.body.appendChild(link);
+                    link.click();
+                    document.body.removeChild(link);
+                    
+                    // Show warning message
+                    document.getElementById('email-message').innerHTML = 
+                        '<div class="message error">Your sample is downloading, but we couldn\'t save your email. Please contact us directly if you need assistance.</div>';
+                })
+                .finally(function() {
+                    // Reset button state
+                    buttonText.style.display = 'inline';
+                    spinner.classList.add('hidden');
+                    submitButton.disabled = false;
+                });
         });
 
         // Service modal functionality
@@ -930,10 +1033,12 @@
                         Cancel
                     </button>
                     <button type="button" onclick="handleCheckout('${config.url}')" class="flex-1 bg-green-600 text-white px-6 py-3 rounded-lg hover:bg-green-700 font-semibold text-center">
-                        Secure Your Beta Analysis - $399
+                        <span class="button-text">Secure Your Beta Analysis - $399</span>
+                        <div class="spinner hidden"></div>
                     </button>
                     <button type="button" onclick="handleCheckout('${config.regularUrl}')" class="flex-1 bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 font-semibold text-center">
-                        Submit Request & Pay - $799
+                        <span class="button-text">Submit Request & Pay - $799</span>
+                        <div class="spinner hidden"></div>
                     </button>
                 `;
             } else {
@@ -948,7 +1053,8 @@
                         Cancel
                     </button>
                     <button type="button" onclick="handleCheckout('${config.url}')" class="flex-1 bg-green-600 text-white px-6 py-3 rounded-lg hover:bg-green-700 font-semibold text-center">
-                        Secure Your ${config.service} - ${config.price}
+                        <span class="button-text">Secure Your ${config.service} - ${config.price}</span>
+                        <div class="spinner hidden"></div>
                     </button>
                 `;
             }
@@ -957,7 +1063,7 @@
             document.body.style.overflow = 'hidden';
         }
 
-        // Simplified checkout function - logs form data and proceeds to checkout
+        // Enhanced checkout function with EmailJS integration
         function handleCheckout(checkoutUrl) {
             const form = document.getElementById('service-form');
             const formData = new FormData(form);
@@ -972,27 +1078,93 @@
             
             // Validate required fields
             if (!data.name || !data.email || !data.product_name || !data.product_description) {
-                alert('Please fill in all required fields before proceeding to checkout.');
+                showFormMessage('Please fill in all required fields before proceeding to checkout.', 'error');
                 return;
             }
 
-            // For now, just log the data (you can set up EmailJS later)
-            console.log('Customer form data:', data);
+            // Show loading state on button
+            const submitButton = event.target;
+            const buttonText = submitButton.querySelector('.button-text');
+            const spinner = submitButton.querySelector('.spinner');
             
-            // Store in localStorage as backup
-            localStorage.setItem('patentintel_customer_' + Date.now(), JSON.stringify(data));
-            
-            // Close modal and redirect to checkout
-            closeModal();
-            window.open(checkoutUrl, '_blank');
-            
-            // Show message to customer
-            alert('Your project details have been saved! Redirecting to secure checkout. We will contact you via email after payment to begin your research.');
+            if (buttonText && spinner) {
+                buttonText.style.display = 'none';
+                spinner.classList.remove('hidden');
+                submitButton.disabled = true;
+            }
+
+            // Prepare email template parameters
+            const emailParams = {
+                to_email: 'hello@patentintel.pro',
+                from_email: data.email,
+                customer_name: data.name,
+                company: data.company || 'Not provided',
+                service_type: data.service_selected,
+                product_name: data.product_name,
+                product_description: data.product_description,
+                key_innovations: data.key_innovations,
+                product_category: data.product_category,
+                development_stage: data.development_stage,
+                concerns: data.concerns.join(', ') || 'None specified',
+                timeline: data.timeline,
+                additional_info: data.additional_info || 'None provided',
+                checkout_url: checkoutUrl,
+                submission_time: new Date().toLocaleString()
+            };
+
+            // Send email via EmailJS
+            emailjs.send('YOUR_SERVICE_ID', 'YOUR_SERVICE_TEMPLATE_ID', emailParams)
+                .then(function(response) {
+                    console.log('Service request email sent successfully:', response);
+                    
+                    // Store in localStorage as backup
+                    localStorage.setItem('patentintel_customer_' + Date.now(), JSON.stringify(data));
+                    
+                    // Show success message
+                    showFormMessage('Form submitted successfully! Redirecting to secure checkout...', 'success');
+                    
+                    // Close modal and redirect after short delay
+                    setTimeout(() => {
+                        closeModal();
+                        window.open(checkoutUrl, '_blank');
+                    }, 1500);
+                    
+                }, function(error) {
+                    console.error('EmailJS error:', error);
+                    
+                    // Store in localStorage as backup even if email fails
+                    localStorage.setItem('patentintel_customer_' + Date.now(), JSON.stringify(data));
+                    
+                    // Show warning but still proceed to checkout
+                    showFormMessage('Your request has been saved locally. Redirecting to checkout...', 'error');
+                    
+                    // Still redirect to checkout after short delay
+                    setTimeout(() => {
+                        closeModal();
+                        window.open(checkoutUrl, '_blank');
+                    }, 2000);
+                })
+                .finally(function() {
+                    // Reset button state
+                    if (buttonText && spinner) {
+                        buttonText.style.display = 'inline';
+                        spinner.classList.add('hidden');
+                        submitButton.disabled = false;
+                    }
+                });
+        }
+
+        // Helper function to show form messages
+        function showFormMessage(message, type) {
+            const messageDiv = document.getElementById('form-message');
+            messageDiv.innerHTML = `<div class="message ${type}">${message}</div>`;
         }
 
         function closeModal() {
             document.getElementById('modal-overlay').classList.add('hidden');
             document.body.style.overflow = 'auto';
+            // Clear any messages
+            document.getElementById('form-message').innerHTML = '';
         }
 
         // Close modal when clicking outside
@@ -1012,6 +1184,12 @@
             if (keys.length === 0) {
                 console.log('No customer submissions found');
             }
+        }
+
+        // Backward compatibility function
+        function redirectToCheckout() {
+            // This function is kept for any lingering references
+            console.warn('redirectToCheckout called - this should use handleCheckout instead');
         }
     </script>
 </body>
