@@ -768,7 +768,7 @@
                 title: 'Quick Check - Service Request',
                 service: 'Quick Check',
                 price: '$299',
-                url: 'https://patentintelpro.gumroad.com/l/uitteg?wanted=true',
+                url: 'https://buy.stripe.com/aFaeV67g1dJ26LG20I4F203',
                 details: 'Basic prior art search with 3-5 key patents analyzed and simple conflict assessment',
                 showBeta: false
             },
@@ -777,8 +777,8 @@
                 service: 'Complete Analysis',
                 price: '$799',
                 betaPrice: '$399',
-                url: 'https://patentintelpro.gumroad.com/l/nupvrjr?wanted=true',
-                regularUrl: 'https://patentintelpro.gumroad.com/l/nupvrjr?wanted=true',
+                url: 'https://buy.stripe.com/fZu00c1VHeN64DyfRy4F202',
+                regularUrl: 'https://buy.stripe.com/fZu00c1VHeN64DyfRy4F202',
                 details: 'Comprehensive patent landscape analysis with detailed conflict assessment and business recommendations',
                 showBeta: true
             },
@@ -786,7 +786,7 @@
                 title: 'Premium Strategy - Service Request',
                 service: 'Premium + Strategy Call',
                 price: '$1,299',
-                url: 'https://patentintelpro.gumroad.com/l/uhnal?wanted=true',
+                url: 'https://buy.stripe.com/fZueV657TawQ6LG7l24F201',
                 details: 'Complete analysis plus strategy consultation with design-around recommendations',
                 showBeta: false
             }
@@ -929,10 +929,10 @@
                     <button type="button" onclick="closeModal()" class="flex-1 px-6 py-3 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50">
                         Cancel
                     </button>
-                    <button type="button" onclick="window.open('${config.url}', '_blank'); closeModal();" class="flex-1 bg-green-600 text-white px-6 py-3 rounded-lg hover:bg-green-700 font-semibold text-center">
+                    <button type="button" onclick="handleCheckout('${config.url}')" class="flex-1 bg-green-600 text-white px-6 py-3 rounded-lg hover:bg-green-700 font-semibold text-center">
                         Secure Your Beta Analysis - $399
                     </button>
-                    <button type="button" onclick="window.open('${config.regularUrl}', '_blank'); closeModal();" class="flex-1 bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 font-semibold text-center">
+                    <button type="button" onclick="handleCheckout('${config.regularUrl}')" class="flex-1 bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 font-semibold text-center">
                         Submit Request & Pay - $799
                     </button>
                 `;
@@ -947,7 +947,7 @@
                     <button type="button" onclick="closeModal()" class="flex-1 px-6 py-3 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50">
                         Cancel
                     </button>
-                    <button type="button" onclick="window.open('${config.url}', '_blank'); closeModal();" class="flex-1 bg-green-600 text-white px-6 py-3 rounded-lg hover:bg-green-700 font-semibold text-center">
+                    <button type="button" onclick="handleCheckout('${config.url}')" class="flex-1 bg-green-600 text-white px-6 py-3 rounded-lg hover:bg-green-700 font-semibold text-center">
                         Secure Your ${config.service} - ${config.price}
                     </button>
                 `;
@@ -957,15 +957,42 @@
             document.body.style.overflow = 'hidden';
         }
 
+        // Simplified checkout function - logs form data and proceeds to checkout
+        function handleCheckout(checkoutUrl) {
+            const form = document.getElementById('service-form');
+            const formData = new FormData(form);
+            
+            // Get all form data
+            const data = Object.fromEntries(formData);
+            data.concerns = Array.from(document.querySelectorAll('input[name="concerns"]:checked'))
+                .map(cb => cb.value);
+            data.service_selected = currentService;
+            data.checkout_url = checkoutUrl;
+            data.timestamp = new Date().toISOString();
+            
+            // Validate required fields
+            if (!data.name || !data.email || !data.product_name || !data.product_description) {
+                alert('Please fill in all required fields before proceeding to checkout.');
+                return;
+            }
+
+            // For now, just log the data (you can set up EmailJS later)
+            console.log('Customer form data:', data);
+            
+            // Store in localStorage as backup
+            localStorage.setItem('patentintel_customer_' + Date.now(), JSON.stringify(data));
+            
+            // Close modal and redirect to checkout
+            closeModal();
+            window.open(checkoutUrl, '_blank');
+            
+            // Show message to customer
+            alert('Your project details have been saved! Redirecting to secure checkout. We will contact you via email after payment to begin your research.');
+        }
+
         function closeModal() {
             document.getElementById('modal-overlay').classList.add('hidden');
             document.body.style.overflow = 'auto';
-        }
-
-        function redirectToCheckout() {
-            const config = serviceConfig[currentService];
-            window.open(config.url, '_blank');
-            closeModal();
         }
 
         // Close modal when clicking outside
@@ -974,6 +1001,18 @@
                 closeModal();
             }
         });
+
+        // Function to view stored customer data (for your use)
+        function viewStoredCustomerData() {
+            const keys = Object.keys(localStorage).filter(key => key.startsWith('patentintel_customer_'));
+            keys.forEach(key => {
+                const data = JSON.parse(localStorage.getItem(key));
+                console.log('Customer submission:', data);
+            });
+            if (keys.length === 0) {
+                console.log('No customer submissions found');
+            }
+        }
     </script>
 </body>
 </html>
