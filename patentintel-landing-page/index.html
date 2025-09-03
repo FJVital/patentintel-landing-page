@@ -800,9 +800,9 @@
 
     <script>
         // EmailJS Configuration
-        // Initialize EmailJS with your User ID
+        // Initialize EmailJS with your Public Key
         (function() {
-            emailjs.init("YOUR_EMAILJS_USER_ID"); // Replace with your actual EmailJS User ID
+            emailjs.init("iIOF1-I-EU7yCRL5g"); // Replace with your actual EmailJS Public Key
         })();
 
         // Service configuration with URLs
@@ -938,7 +938,7 @@
             };
             
             // Send email using EmailJS
-            emailjs.send('YOUR_SERVICE_ID', 'YOUR_TEMPLATE_ID', emailParams)
+            emailjs.send('service_j0zwc9y', 'template_b4zk4vg', emailParams)
                 .then(function(response) {
                     console.log('Email sent successfully:', response);
                     
@@ -1113,7 +1113,7 @@
             };
 
             // Send email via EmailJS
-            emailjs.send('YOUR_SERVICE_ID', 'YOUR_SERVICE_TEMPLATE_ID', emailParams)
+            emailjs.send('service_j0zwc9y', 'template_yu9l9x6', emailParams)
                 .then(function(response) {
                     console.log('Service request email sent successfully:', response);
                     
