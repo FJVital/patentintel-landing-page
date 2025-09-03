@@ -139,11 +139,9 @@
             <p class="text-xl mb-8 max-w-3xl font-bold mx-auto opacity-90">
                 Don't let patent uncertainty stall your launch. Get the clarity you need in just 48 hours with our professional patent research. Using AI-enhanced research and the expertise of industrial designers, we deliver a comprehensive analysis for up to 70% less than law firms, which can take two weeks or more.
             </p>
-            <div class="flex flex-col sm:flex-row gap-4 justify-center">
-                <a href="https://patentintelpro.gumroad.com/l/nupvrjr?wanted=true" target="_blank">
-                    <img src="start-your-research-today.png" alt="Start Your Research Today" class="hero-btn cursor-pointer hover:opacity-90 transition mx-auto">
-                </a>
-                <img src="see-how-it-works.png" alt="See How It Works" class="hero-btn cursor-pointer hover:opacity-90 transition mx-auto" onclick="document.getElementById('process').scrollIntoView({behavior: 'smooth'})">
+            <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
+                <img src="start-your-research-today.png" alt="Start Your Research Today" class="hero-btn cursor-pointer hover:opacity-90 transition" onclick="openModal('complete-analysis')">
+                <img src="see-how-it-works.png" alt="See How It Works" class="hero-btn cursor-pointer hover:opacity-90 transition" onclick="document.getElementById('process').scrollIntoView({behavior: 'smooth'})">
             </div>
         </div>
     </section>
@@ -153,7 +151,428 @@
         <div class="container mx-auto px-6">
             <div class="grid md:grid-cols-2 gap-12 items-start">
                 <div>
-                    <h2 class="text-3xl font-bold text-orange-500 mb-6">Why Most Inventors Skip Patent Research</h2>
+                    <h4 class="font-semibold mb-4">Contact</h4>
+                    <p class="text-gray-100">hello@patentintel.pro</p>
+                    <p class="text-gray-100">Fast, professional patent research</p>
+                </div>
+            </div>
+            <div class="border-t border-gray-100 mt-8 pt-8 text-center text-gray-100">
+                <p>&copy; 2025 patentintel.pro All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Email Collection Modal -->
+    <div id="email-modal" class="fixed inset-0 bg-black bg-opacity-50 z-50 hidden">
+        <div class="flex items-center justify-center min-h-screen px-4">
+            <div class="bg-white rounded-lg p-8 max-w-md w-full">
+                <div class="flex justify-between items-center mb-6">
+                    <h3 class="text-2xl font-bold text-gray-900">Download Sample Report</h3>
+                    <button onclick="closeEmailModal()" class="text-gray-500 hover:text-gray-700">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                        </svg>
+                    </button>
+                </div>
+                
+                <form id="email-form" class="space-y-4">
+                    <div>
+                        <label for="sample-email" class="block text-sm font-medium text-gray-700 mb-2">Email Address *</label>
+                        <input type="email" id="sample-email" name="email" required class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                    </div>
+                    <div>
+                        <label for="sample-name" class="block text-sm font-medium text-gray-700 mb-2">Name (Optional)</label>
+                        <input type="text" id="sample-name" name="name" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                    </div>
+                    <div class="flex gap-4">
+                        <button type="button" onclick="closeEmailModal()" class="flex-1 px-6 py-3 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50">
+                            Cancel
+                        </button>
+                        <button type="submit" class="flex-1 bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 font-semibold">
+                            Download Sample
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Overlay -->
+    <div id="modal-overlay" class="fixed inset-0 bg-black bg-opacity-50 z-50 hidden">
+        <div class="flex items-center justify-center min-h-screen px-4">
+            <div class="bg-white rounded-lg p-8 max-w-2xl w-full max-h-screen overflow-y-auto">
+                <div class="flex justify-between items-center mb-6">
+                    <h3 id="modal-title" class="text-2xl font-bold text-gray-900">Service Request Form</h3>
+                    <button onclick="closeModal()" class="text-gray-500 hover:text-gray-700">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                        </svg>
+                    </button>
+                </div>
+                
+                <form id="service-form" action="#" method="POST" class="space-y-6">
+                    <input type="hidden" id="service-type" name="service_type" value="">
+                    
+                    <!-- Contact Information -->
+                    <div class="grid md:grid-cols-2 gap-4">
+                        <div>
+                            <label for="name" class="block text-sm font-medium text-gray-700 mb-2">Full Name *</label>
+                            <input type="text" id="name" name="name" required class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                        </div>
+                        <div>
+                            <label for="email" class="block text-sm font-medium text-gray-700 mb-2">Email Address *</label>
+                            <input type="email" id="email" name="email" required class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                        </div>
+                    </div>
+                    
+                    <div>
+                        <label for="company" class="block text-sm font-medium text-gray-700 mb-2">Company/Organization (Optional)</label>
+                        <input type="text" id="company" name="company" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                    </div>
+                    
+                    <!-- Product Information -->
+                    <div class="border-t pt-6">
+                        <h4 class="text-lg font-semibold text-gray-900 mb-4">Product Information</h4>
+                        
+                        <div>
+                            <label for="product-name" class="block text-sm font-medium text-gray-700 mb-2">Product/Invention Name *</label>
+                            <input type="text" id="product-name" name="product_name" required class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent" placeholder="e.g., Smart Modular Spice Rack">
+                        </div>
+                        
+                        <div class="mt-4">
+                            <label for="product-description" class="block text-sm font-medium text-gray-700 mb-2">Detailed Product Description *</label>
+                            <textarea id="product-description" name="product_description" rows="5" required class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent" placeholder="Describe your product in detail: What does it do? How does it work? What makes it unique? Include materials, mechanisms, key features, etc."></textarea>
+                            <p class="text-sm text-gray-500 mt-1">Be as specific as possible - this helps us conduct thorough research</p>
+                        </div>
+                        
+                        <div class="mt-4">
+                            <label for="key-innovations" class="block text-sm font-medium text-gray-700 mb-2">Key Innovations/Unique Features *</label>
+                            <textarea id="key-innovations" name="key_innovations" rows="3" required class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent" placeholder="What specific features or innovations make your product different from existing solutions?"></textarea>
+                        </div>
+                        
+                        <div class="mt-4 grid md:grid-cols-2 gap-4">
+                            <div>
+                                <label for="product-category" class="block text-sm font-medium text-gray-700 mb-2">Product Category *</label>
+                                <select id="product-category" name="product_category" required class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                                    <option value="">Select category...</option>
+                                    <option value="consumer-products">Consumer Products</option>
+                                    <option value="kitchen-dining">Kitchen & Dining</option>
+                                    <option value="home-garden">Home & Garden</option>
+                                    <option value="electronics">Electronics</option>
+                                    <option value="automotive">Automotive</option>
+                                    <option value="health-medical">Health & Medical</option>
+                                    <option value="sports-recreation">Sports & Recreation</option>
+                                    <option value="industrial">Industrial/Manufacturing</option>
+                                    <option value="other">Other</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label for="development-stage" class="block text-sm font-medium text-gray-700 mb-2">Development Stage *</label>
+                                <select id="development-stage" name="development_stage" required class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                                    <option value="">Select stage...</option>
+                                    <option value="concept">Concept/Idea Stage</option>
+                                    <option value="design">Design Development</option>
+                                    <option value="prototype">Prototype Built</option>
+                                    <option value="testing">Testing Phase</option>
+                                    <option value="pre-launch">Pre-Launch</option>
+                                    <option value="launching">Ready to Launch</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Research Focus -->
+                    <div class="border-t pt-6">
+                        <h4 class="text-lg font-semibold text-gray-900 mb-4">Research Focus</h4>
+                        
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-3">What are your main concerns? (Select all that apply)</label>
+                            <div class="space-y-2">
+                                <label class="flex items-center">
+                                    <input type="checkbox" name="concerns" value="patent-conflicts" class="rounded text-blue-600">
+                                    <span class="ml-2 text-sm">Potential patent conflicts with my design</span>
+                                </label>
+                                <label class="flex items-center">
+                                    <input type="checkbox" name="concerns" value="freedom-operate" class="rounded text-blue-600">
+                                    <span class="ml-2 text-sm">Freedom to operate in the market</span>
+                                </label>
+                                <label class="flex items-center">
+                                    <input type="checkbox" name="concerns" value="competitor-analysis" class="rounded text-blue-600">
+                                    <span class="ml-2 text-sm">Understanding competitive landscape</span>
+                                </label>
+                                <label class="flex items-center">
+                                    <input type="checkbox" name="concerns" value="investment-presentation" class="rounded text-blue-600">
+                                    <span class="ml-2 text-sm">IP analysis for investor presentations</span>
+                                </label>
+                                <label class="flex items-center">
+                                    <input type="checkbox" name="concerns" value="filing-strategy" class="rounded text-blue-600">
+                                    <span class="ml-2 text-sm">Patent filing strategy guidance</span>
+                                </label>
+                            </div>
+                        </div>
+                        
+                        <div class="mt-4">
+                            <label for="timeline" class="block text-sm font-medium text-gray-700 mb-2">When do you need this research?</label>
+                            <select id="timeline" name="timeline" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                                <option value="asap">ASAP (within 24-48 hours)</option>
+                                <option value="week">Within a week</option>
+                                <option value="month">Within a month</option>
+                                <option value="flexible">Timeline is flexible</option>
+                            </select>
+                        </div>
+                        
+                        <div class="mt-4">
+                            <label for="additional-info" class="block text-sm font-medium text-gray-700 mb-2">Additional Information</label>
+                            <textarea id="additional-info" name="additional_info" rows="3" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent" placeholder="Any other details, specific concerns, or questions you'd like us to address?"></textarea>
+                        </div>
+                    </div>
+                    
+                    <!-- File Upload -->
+                    <div class="border-t pt-6">
+                        <label for="files" class="block text-sm font-medium text-gray-700 mb-2">Attach Files (Optional)</label>
+                        <input type="file" id="files" name="files" multiple accept=".pdf,.jpg,.jpeg,.png,.doc,.docx" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                        <p class="text-sm text-gray-500 mt-1">Product sketches, CAD files, photos, existing research, etc.</p>
+                    </div>
+                    
+                    <!-- Pricing Display -->
+                    <div class="bg-blue-50 p-4 rounded-lg">
+                        <div class="flex justify-between items-center">
+                            <span class="font-semibold text-gray-900">Service:</span>
+                            <span id="service-display" class="font-semibold text-blue-600">Complete Analysis</span>
+                        </div>
+                        <div class="flex justify-between items-center mt-2" id="price-section">
+                            <span class="font-semibold text-gray-900">Price:</span>
+                            <span id="price-display" class="text-2xl font-bold text-blue-600">$799</span>
+                        </div>
+                        <div class="text-sm text-gray-600 mt-2" id="service-details">
+                            Professional patent landscape analysis with detailed conflict assessment and business recommendations
+                        </div>
+                    </div>
+                    
+                    <!-- Buttons Section -->
+                    <div id="button-section" class="flex gap-4">
+                        <button type="button" onclick="closeModal()" class="flex-1 px-6 py-3 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50">
+                            Cancel
+                        </button>
+                        <button type="button" id="checkout-button" onclick="redirectToCheckout()" class="flex-1 bg-green-600 text-white px-6 py-3 rounded-lg hover:bg-green-700 font-semibold text-center">
+                            Secure Your Analysis
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Service configuration with URLs
+        const serviceConfig = {
+            'quick-check': {
+                title: 'Quick Check - Service Request',
+                service: 'Quick Check',
+                price: '$299',
+                url: 'https://patentintelpro.gumroad.com/l/uitteg?wanted=true',
+                details: 'Basic prior art search with 3-5 key patents analyzed and simple conflict assessment',
+                showBeta: false
+            },
+            'complete-analysis': {
+                title: 'Complete Analysis - Service Request',
+                service: 'Complete Analysis',
+                price: '$799',
+                betaPrice: '$399',
+                url: 'https://patentintelpro.gumroad.com/l/nupvrjr?wanted=true',
+                regularUrl: 'https://patentintelpro.gumroad.com/l/nupvrjr?wanted=true',
+                details: 'Comprehensive patent landscape analysis with detailed conflict assessment and business recommendations',
+                showBeta: true
+            },
+            'premium-strategy': {
+                title: 'Premium Strategy - Service Request',
+                service: 'Premium + Strategy Call',
+                price: '$1,299',
+                url: 'https://patentintelpro.gumroad.com/l/uhnal?wanted=true',
+                details: 'Complete analysis plus strategy consultation with design-around recommendations',
+                showBeta: false
+            }
+        };
+
+        // Current service
+        let currentService = '';
+
+        // Hamburger menu
+        function toggleMenu() {
+            const menu = document.getElementById('mobile-menu');
+            const hamburger = document.querySelector('.hamburger');
+            menu.classList.toggle('active');
+            hamburger.classList.toggle('active');
+        }
+
+        function closeMenu() {
+            const menu = document.getElementById('mobile-menu');
+            const hamburger = document.querySelector('.hamburger');
+            menu.classList.remove('active');
+            hamburger.classList.remove('active');
+        }
+
+        // Testimonial slider
+        let currentTestimonial = 0;
+        const totalTestimonials = 6;
+
+        function showTestimonial(index) {
+            currentTestimonial = index;
+            const track = document.getElementById('testimonial-track');
+            track.style.transform = `translateX(-${index * 100}%)`;
+            
+            // Update dots
+            document.querySelectorAll('.testimonial-dot').forEach((dot, i) => {
+                if (i === index) {
+                    dot.classList.add('active');
+                } else {
+                    dot.classList.remove('active');
+                }
+            });
+        }
+
+        // Auto-advance testimonials
+        setInterval(() => {
+            currentTestimonial = (currentTestimonial + 1) % totalTestimonials;
+            showTestimonial(currentTestimonial);
+        }, 5000);
+
+        // Add dot styles
+        const style = document.createElement('style');
+        style.textContent = `
+            .testimonial-dot {
+                width: 12px;
+                height: 12px;
+                border-radius: 50%;
+                background-color: #d1d5db;
+                border: none;
+                cursor: pointer;
+                transition: background-color 0.3s;
+            }
+            .testimonial-dot.active {
+                background-color: #f97316;
+            }
+        `;
+        document.head.appendChild(style);
+
+        // Sample download functionality
+        let currentSampleType = '';
+
+        function downloadSample(sampleType) {
+            currentSampleType = sampleType;
+            document.getElementById('email-modal').classList.remove('hidden');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeEmailModal() {
+            document.getElementById('email-modal').classList.add('hidden');
+            document.body.style.overflow = 'auto';
+        }
+
+        // Email form submission
+        document.getElementById('email-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const email = document.getElementById('sample-email').value;
+            const name = document.getElementById('sample-name').value;
+            
+            console.log('Email captured:', { email, name, sampleType: currentSampleType });
+            
+            const sampleFiles = {
+                'quick-check': 'smart-phone-case-quick-check.pdf',
+                'complete-analysis': 'teardrop-salt-shakers-complete-analysis.pdf',
+                'premium-strategy': 'smart-insulin-device-premium-strategy.pdf'
+            };
+            
+            const link = document.createElement('a');
+            link.href = sampleFiles[currentSampleType];
+            link.download = sampleFiles[currentSampleType];
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+            
+            closeEmailModal();
+            alert('Thank you! Your sample report is downloading now.');
+        });
+
+        // Service modal functionality
+        function openModal(serviceType) {
+            currentService = serviceType;
+            const config = serviceConfig[serviceType];
+            
+            document.getElementById('modal-title').textContent = config.title;
+            document.getElementById('service-type').value = serviceType;
+            document.getElementById('service-display').textContent = config.service;
+            document.getElementById('service-details').textContent = config.details;
+            
+            // Handle pricing display and buttons
+            const priceSection = document.getElementById('price-section');
+            const buttonSection = document.getElementById('button-section');
+            
+            if (config.showBeta) {
+                // Complete Analysis with beta option
+                priceSection.innerHTML = `
+                    <span class="font-semibold text-gray-900">Beta Price:</span>
+                    <span class="text-2xl font-bold text-green-600">$399</span>
+                    <span class="text-lg text-gray-500 line-through ml-2">$799</span>
+                `;
+                const betaNote = document.createElement('div');
+                betaNote.className = 'text-sm text-red-600 font-medium mt-1';
+                betaNote.textContent = 'Limited Time: First 10 Customers Only';
+                priceSection.parentNode.insertBefore(betaNote, document.getElementById('service-details'));
+                
+                buttonSection.innerHTML = `
+                    <button type="button" onclick="closeModal()" class="flex-1 px-6 py-3 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50">
+                        Cancel
+                    </button>
+                    <button type="button" onclick="window.open('${config.url}', '_blank'); closeModal();" class="flex-1 bg-green-600 text-white px-6 py-3 rounded-lg hover:bg-green-700 font-semibold text-center">
+                        Secure Your Beta Analysis - $399
+                    </button>
+                    <button type="button" onclick="window.open('${config.regularUrl}', '_blank'); closeModal();" class="flex-1 bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 font-semibold text-center">
+                        Submit Request & Pay - $799
+                    </button>
+                `;
+            } else {
+                // Quick Check and Premium Strategy
+                priceSection.innerHTML = `
+                    <span class="font-semibold text-gray-900">Price:</span>
+                    <span class="text-2xl font-bold text-blue-600">${config.price}</span>
+                `;
+                
+                buttonSection.innerHTML = `
+                    <button type="button" onclick="closeModal()" class="flex-1 px-6 py-3 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50">
+                        Cancel
+                    </button>
+                    <button type="button" onclick="window.open('${config.url}', '_blank'); closeModal();" class="flex-1 bg-green-600 text-white px-6 py-3 rounded-lg hover:bg-green-700 font-semibold text-center">
+                        Secure Your ${config.service} - ${config.price}
+                    </button>
+                `;
+            }
+            
+            document.getElementById('modal-overlay').classList.remove('hidden');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeModal() {
+            document.getElementById('modal-overlay').classList.add('hidden');
+            document.body.style.overflow = 'auto';
+        }
+
+        function redirectToCheckout() {
+            const config = serviceConfig[currentService];
+            window.open(config.url, '_blank');
+            closeModal();
+        }
+
+        // Close modal when clicking outside
+        document.getElementById('modal-overlay').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeModal();
+            }
+        });
+    </script>
+</body>
+</html>2 class="text-3xl font-bold text-orange-500 mb-6">Why Most Inventors Skip Patent Research</h2>
                     <div class="space-y-4">
                         <div class="flex items-start space-x-3">
                             <img src="red-x.png" alt="Problem" class="w-6 h-6 mt-1">
@@ -185,7 +604,7 @@
                             <img src="checkmark.png" alt="Solution" class="w-6 h-6 mt-1">
                             <div>
                                 <h3 class="font-semibold text-gray-900 scaled-text">70% Less Expensive</h3>
-                                <p class="text-gray-600 scaled-text">Professional research for $399 beta pricing instead of $3,000+</p>
+                                <p class="text-gray-600 scaled-text">Professional research starting at $299 instead of $3,000+</p>
                             </div>
                         </div>
                         <div class="flex items-start space-x-3">
@@ -213,18 +632,14 @@
         <div class="container mx-auto px-6">
             <div class="text-center mb-12">
                 <h2 class="text-4xl font-bold text-orange-500 mb-4">Choose Your Research Level</h2>
-                <p class="text-xl text-gray-600">Beta pricing - Limited time for first 10 customers</p>
+                <p class="text-xl text-gray-600">From quick patent checks to comprehensive landscape analysis</p>
             </div>
             
             <div class="grid md:grid-cols-3 gap-8">
                 <!-- Quick Check -->
                 <div class="bg-white p-8 rounded-lg shadow-lg border-2 border-gray-200">
                     <h3 class="text-2xl font-bold text-gray-900 mb-4">Quick Check</h3>
-                    <div class="mb-4">
-                        <span class="text-3xl font-bold text-green-600">$199</span>
-                        <span class="text-lg text-gray-500 line-through ml-2">$299</span>
-                        <div class="text-sm text-red-600 font-medium">Beta Price</div>
-                    </div>
+                    <div class="text-3xl font-bold text-blue-600 mb-6">$299</div>
                     <ul class="space-y-3 mb-8">
                         <li class="flex items-center">
                             <img src="checkmark.png" alt="Included" class="w-5 h-5 mr-2">
@@ -244,9 +659,7 @@
                         </li>
                     </ul>
                     <div class="space-y-3">
-                        <a href="https://patentintelpro.gumroad.com/l/nupvrjr?wanted=true" target="_blank">
-                            <img src="get-quick-check.png" alt="Get Quick Check" class="service-btn cursor-pointer hover:opacity-90 transition mx-auto">
-                        </a>
+                        <img src="get-quick-check.png" alt="Get Quick Check" class="service-btn cursor-pointer hover:opacity-90 transition mx-auto" onclick="openModal('quick-check')">
                     </div>
                 </div>
 
@@ -284,20 +697,14 @@
                         </li>
                     </ul>
                     <div class="space-y-3">
-                        <a href="https://patentintelpro.gumroad.com/l/nupvrjr?wanted=true" target="_blank">
-                            <img src="start-complete-analysis.png" alt="Start Complete Analysis" class="service-btn cursor-pointer hover:opacity-90 transition mx-auto">
-                        </a>
+                        <img src="start-complete-analysis.png" alt="Start Complete Analysis" class="service-btn cursor-pointer hover:opacity-90 transition mx-auto" onclick="openModal('complete-analysis')">
                     </div>
                 </div>
 
                 <!-- Premium + Strategy -->
                 <div class="bg-white p-8 rounded-lg shadow-lg border-2 border-gray-200">
                     <h3 class="text-2xl font-bold text-gray-900 mb-4">Premium + Strategy</h3>
-                    <div class="mb-4">
-                        <span class="text-3xl font-bold text-green-600">$699</span>
-                        <span class="text-lg text-gray-500 line-through ml-2">$1,299</span>
-                        <div class="text-sm text-red-600 font-medium">Beta Price</div>
-                    </div>
+                    <div class="text-3xl font-bold text-blue-600 mb-6">$1,299</div>
                     <ul class="space-y-3 mb-8">
                         <li class="flex items-center">
                             <img src="checkmark.png" alt="Included" class="w-5 h-5 mr-2">
@@ -317,9 +724,7 @@
                         </li>
                     </ul>
                     <div class="space-y-3">
-                        <a href="https://patentintelpro.gumroad.com/l/nupvrjr?wanted=true" target="_blank">
-                            <img src="get-premium-service.png" alt="Get Premium Service" class="service-btn cursor-pointer hover:opacity-90 transition mx-auto">
-                        </a>
+                        <img src="get-premium-service.png" alt="Get Premium Service" class="service-btn cursor-pointer hover:opacity-90 transition mx-auto" onclick="openModal('premium-strategy')">
                     </div>
                 </div>
             </div>
@@ -533,9 +938,7 @@
             <h2 class="text-3xl font-bold mb-4">Ready to Protect Your Innovation?</h2>
             <p class="text-xl mb-8 opacity-90">Don't let patent uncertainty hold back your product launch</p>
             <div class="text-center">
-                <a href="https://patentintelpro.gumroad.com/l/nupvrjr?wanted=true" target="_blank">
-                    <img src="start-your-patent-research-today.png" alt="Start Your Patent Research Today" class="cta-btn cursor-pointer hover:opacity-90 transition mx-auto">
-                </a>
+                <img src="start-your-patent-research-today.png" alt="Start Your Patent Research Today" class="cta-btn cursor-pointer hover:opacity-90 transition mx-auto" onclick="openModal('complete-analysis')">
                 <div class="text-2xl opacity-75 mt-4">
                     ✓ 48-hour delivery ✓ Professional quality ✓ Money-back guarantee
                 </div>
@@ -562,153 +965,4 @@
                     </ul>
                 </div>
                 <div>
-                    <h4 class="font-semibold mb-4">Contact</h4>
-                    <p class="text-gray-100">hello@patentintel.pro</p>
-                    <p class="text-gray-100">Fast, professional patent research</p>
-                </div>
-            </div>
-            <div class="border-t border-gray-100 mt-8 pt-8 text-center text-gray-100">
-                <p>&copy; 2025 patentintel.pro All rights reserved.</p>
-            </div>
-        </div>
-    </footer>
-
-    <!-- Email Collection Modal -->
-    <div id="email-modal" class="fixed inset-0 bg-black bg-opacity-50 z-50 hidden">
-        <div class="flex items-center justify-center min-h-screen px-4">
-            <div class="bg-white rounded-lg p-8 max-w-md w-full">
-                <div class="flex justify-between items-center mb-6">
-                    <h3 class="text-2xl font-bold text-gray-900">Download Sample Report</h3>
-                    <button onclick="closeEmailModal()" class="text-gray-500 hover:text-gray-700">
-                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
-                        </svg>
-                    </button>
-                </div>
-                
-                <form id="email-form" class="space-y-4">
-                    <div>
-                        <label for="sample-email" class="block text-sm font-medium text-gray-700 mb-2">Email Address *</label>
-                        <input type="email" id="sample-email" name="email" required class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
-                    </div>
-                    <div>
-                        <label for="sample-name" class="block text-sm font-medium text-gray-700 mb-2">Name (Optional)</label>
-                        <input type="text" id="sample-name" name="name" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
-                    </div>
-                    <div class="flex gap-4">
-                        <button type="button" onclick="closeEmailModal()" class="flex-1 px-6 py-3 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50">
-                            Cancel
-                        </button>
-                        <button type="submit" class="flex-1 bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 font-semibold">
-                            Download Sample
-                        </button>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-
-    <script>
-        // Hamburger menu
-        function toggleMenu() {
-            const menu = document.getElementById('mobile-menu');
-            const hamburger = document.querySelector('.hamburger');
-            menu.classList.toggle('active');
-            hamburger.classList.toggle('active');
-        }
-
-        function closeMenu() {
-            const menu = document.getElementById('mobile-menu');
-            const hamburger = document.querySelector('.hamburger');
-            menu.classList.remove('active');
-            hamburger.classList.remove('active');
-        }
-
-        // Testimonial slider
-        let currentTestimonial = 0;
-        const totalTestimonials = 6;
-
-        function showTestimonial(index) {
-            currentTestimonial = index;
-            const track = document.getElementById('testimonial-track');
-            track.style.transform = `translateX(-${index * 100}%)`;
-            
-            // Update dots
-            document.querySelectorAll('.testimonial-dot').forEach((dot, i) => {
-                if (i === index) {
-                    dot.classList.add('active');
-                } else {
-                    dot.classList.remove('active');
-                }
-            });
-        }
-
-        // Auto-advance testimonials
-        setInterval(() => {
-            currentTestimonial = (currentTestimonial + 1) % totalTestimonials;
-            showTestimonial(currentTestimonial);
-        }, 5000);
-
-        // Add dot styles
-        const style = document.createElement('style');
-        style.textContent = `
-            .testimonial-dot {
-                width: 12px;
-                height: 12px;
-                border-radius: 50%;
-                background-color: #d1d5db;
-                border: none;
-                cursor: pointer;
-                transition: background-color 0.3s;
-            }
-            .testimonial-dot.active {
-                background-color: #f97316;
-            }
-        `;
-        document.head.appendChild(style);
-
-        // Sample download functionality
-        let currentSampleType = '';
-
-        function downloadSample(sampleType) {
-            currentSampleType = sampleType;
-            document.getElementById('email-modal').classList.remove('hidden');
-            document.body.style.overflow = 'hidden';
-        }
-
-        function closeEmailModal() {
-            document.getElementById('email-modal').classList.add('hidden');
-            document.body.style.overflow = 'auto';
-        }
-
-        // Email form submission
-        document.getElementById('email-form').addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            const email = document.getElementById('sample-email').value;
-            const name = document.getElementById('sample-name').value;
-            
-            // Here you would typically send the email to your backend
-            console.log('Email captured:', { email, name, sampleType: currentSampleType });
-            
-            // Simulate download
-            const sampleFiles = {
-                'quick-check': 'smart-phone-case-quick-check.pdf',
-                'complete-analysis': 'teardrop-salt-shakers-complete-analysis.pdf',
-                'premium-strategy': 'smart-insulin-device-premium-strategy.pdf'
-            };
-            
-            // Create a temporary link to trigger download
-            const link = document.createElement('a');
-            link.href = sampleFiles[currentSampleType]; // You'll need to host these files
-            link.download = sampleFiles[currentSampleType];
-            document.body.appendChild(link);
-            link.click();
-            document.body.removeChild(link);
-            
-            closeEmailModal();
-            alert('Thank you! Your sample report is downloading now.');
-        });
-    </script>
-</body>
-</html>
+                    <h
